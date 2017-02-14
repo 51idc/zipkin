@@ -11,7 +11,7 @@ zipkin:
     sample-rate: ${COLLECTOR_SAMPLE_RATE:1.0}
     kafka:
       # ZooKeeper host string, comma-separated host:port value.
-      zookeeper: ${KAFKA_ZOOKEEPER:}
+      zookeeper: ${KAFKA_ZOOKEEPER:192.168.201.101:2181}
       # Name of topic to poll for spans
       topic: ${KAFKA_TOPIC:zipkin}
       # Consumer group this process is consuming on behalf of.

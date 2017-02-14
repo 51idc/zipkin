@@ -599,6 +599,7 @@
             <exclude>kafka_*/**</exclude>
             <exclude>src/test/resources/**</exclude>
             <exclude>src/main/resources/**</exclude>
+            <exclude>src/main/java/**</exclude>
           </excludes>
           <strictCheck>true</strictCheck>
         </configuration>
