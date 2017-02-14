@@ -47,6 +47,7 @@ final class KafkaStreamProcessor implements Runnable {
   public void run() {
     ConsumerIterator<byte[], byte[]> messages = stream.iterator();
     while (messages.hasNext()) {
+      try {
       byte[] bytes = messages.next().message();
       metrics.incrementMessages();
       logger.info("new message comming from kafka," + new String(bytes));
@@ -80,7 +81,6 @@ final class KafkaStreamProcessor implements Runnable {
       // .. When serializing a Span (Struct), the first byte will be the type of a field
       // .. When serializing a List[ThriftSpan], the first byte is the member type, TType.STRUCT(12)
       // .. As ThriftSpan has no STRUCT fields: so, if the first byte is TType.STRUCT(12), it is a list.
-      try {
         if (bytes[0] == '[') {
           collector.acceptSpans(bytes, Codec.JSON, NOOP);
         } else {
@@ -91,8 +91,8 @@ final class KafkaStreamProcessor implements Runnable {
           }
         }
         logger.info("message process down, has next: " + messages.hasNext());
-      }catch (Exception e){
-        logger.error(e.getMessage(),e);
+      }catch (Exception e) {
+        logger.error(e.getMessage(), e);
       }
     }
   }

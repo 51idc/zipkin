@@ -11,7 +11,7 @@ zipkin:
     sample-rate: ${COLLECTOR_SAMPLE_RATE:1.0}
     kafka:
       # ZooKeeper host string, comma-separated host:port value.
-      zookeeper: ${KAFKA_ZOOKEEPER:192.168.201.101:2181}
+      zookeeper: ${KAFKA_ZOOKEEPER:}
       # Name of topic to poll for spans
       topic: ${KAFKA_TOPIC:zipkin}
       # Consumer group this process is consuming on behalf of.
@@ -34,7 +34,7 @@ zipkin:
 
   storage:
     strict-trace-id: ${STRICT_TRACE_ID:true}
-    type: ${STORAGE_TYPE:mem}
+    type: ${STORAGE_TYPE:mysql}
     cassandra:
       # Comma separated list of hosts / ip addresses part of Cassandra cluster.
       contact-points: ${CASSANDRA_CONTACT_POINTS:localhost}
@@ -95,7 +95,7 @@ zipkin:
       port: ${MYSQL_TCP_PORT:3306}
       username: ${MYSQL_USER:}
       password: ${MYSQL_PASS:}
-      db: ${MYSQL_DB:zipkin}
+      db: ${MYSQL_DB:}
       max-active: ${MYSQL_MAX_CONNECTIONS:10}
       use-ssl: ${MYSQL_USE_SSL:false}
   ui:
