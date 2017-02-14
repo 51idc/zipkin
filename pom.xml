@@ -600,6 +600,7 @@
             <exclude>src/test/resources/**</exclude>
             <exclude>src/main/resources/**</exclude>
             <exclude>src/main/java/**</exclude>
+            <exclude>src/main/docker/**</exclude>
           </excludes>
           <strictCheck>true</strictCheck>
         </configuration>
@@ -640,6 +641,23 @@
           <packageName>zipkin</packageName>
         </configuration>
       </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.2.3</version>
+                <configuration>
+                    <imageName>${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
     </plugins>
   </build>
 
